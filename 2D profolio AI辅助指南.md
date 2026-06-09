@@ -79,7 +79,7 @@ AI 优化 CI/CD 管道、自动回滚、监控漂移；集成 GitHub Actions 实
 | 2.2 内容规划表 | 每个页面内容模板，AI 自动填充 Markdown 到页面 |
 | 3.1 风格指南 | 颜色、字体规范，约束 AI CSS/Tailwind 生成 |
 | 3.2 原型/线框图 | 布局截图，AI 转为 HTML/CSS 原型 |
-| 3.3 交互与动效说明 | 2D 悬停/点击/滚动交互动效，AI 引入 GSAP / Framer Motion / CSS Animations |
+| 3.3 交互与动效说明 | 2D 悬停/点击/滚动交互动效，AI 引入 Framer Motion / CSS Animations |
 
 ### 3. 开发阶段文档
 
