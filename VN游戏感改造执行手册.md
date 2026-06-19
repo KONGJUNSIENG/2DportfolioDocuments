@@ -42,7 +42,7 @@
 |---|------|--------|------|
 | 1 | `src/components/DialogBox.tsx` | DialogBox | VN 对话框：白色圆角底框 + #2FA4D7 蓝底名字框(rounded-xl) + 蓝底文字框(rounded-md)，flex 比例 1:3 |
 | 2 | `src/components/ChapterHeader.tsx` | ChapterHeader | VN 章节标题（"CHAPTER N"标签 + 标题 + 蓝色下划线） |
-| 3 | `src/components/OptionButton.tsx` | OptionButton | VN 选项按钮（`#2FA4D7` 蓝底 + ▶ 箭头 + 白色文字，纯 CSS） |
+| 3 | `src/components/OptionButton.tsx` | OptionButton | VN 选项按钮（`#2FA4D7` 蓝底 + ▶ 箭头 + 白色文字，使用 option-button.png 背景素材） |
 | 4 | `src/components/SectionTransition.tsx` | SectionTransition | 过渡台词（`~ text ~` 居中 + 水平装饰线） |
 
 ### 2.2 修改文件（10 个）
@@ -95,7 +95,7 @@
 |----|------|--------|------|--------|---------|---------|:---:|
 | VN-6.1 | **创建 `DialogBox.tsx`**：VN 对话框。三层圆角结构（白框 `rounded-lg` + 名字框 `rounded-xl` + 文字框 `rounded-md`）。底色 `#2FA4D7`，等比例 `aspect-[1200/225]`，内层 flex 1:3 固定比例。Props: `{ characterName?, children, className? }` | P0 | — | M | 进入视口对话框淡入上浮；名字框与文字框高度固定 1:3；文字白色；响应式自适应 | `DialogBox.tsx` | ✅ |
 | VN-6.2 | **创建 `ChapterHeader.tsx`**：VN 章节标题。Props: `{ chapterNumber?: number, title, subtitle?, className? }`。渲染：`CHAPTER 01` 标签 (`text-dialog-blue`) → 标题 → 蓝色下划线装饰条 | P0 | — | M | 进入视口时：整体从左侧滑入（x:-30→0, 500ms） | `ChapterHeader.tsx` | ✅ |
-| VN-6.3 | **创建 `OptionButton.tsx`**：VN 选项按钮。纯 CSS 单变体：蓝底白色文字，`▶` 指示符，`whileHover` 右移+放大。Props: `{ children, onClick?, className? }` | P0 | — | S | 按钮渲染为蓝底白字；hover 缩放+右移 4px；tap 缩回 | `OptionButton.tsx` | ✅ |
+| VN-6.3 | **创建 `OptionButton.tsx`**：VN 选项按钮。使用 option-button.png 为背景素材：蓝底白色文字，`▶` 指示符，`whileHover` 右移+放大。Props: `{ children, onClick?, className? }` | P0 | — | S | 按钮渲染为蓝底白字；hover 缩放+右移 4px；tap 缩回 | `OptionButton.tsx` | ✅ |
 | VN-6.4 | **创建 `SectionTransition.tsx`**：过渡台词组件。居中显示 `~ text ~`，水平装饰线贯穿，`whileInView` 淡入 400ms。不使用 DialogBox。Props: `{ text, className? }` | P0 | — | M | 滚动到视口时，文字从中心淡入放大；`viewport: { once: true }` | `SectionTransition.tsx` | ✅ |
 | VN-6.5 | **`animations.ts` 追加 5 个 VN variants**：`chapterReveal`（x:-30→0）、`dialogSlideUp`（y:24→0, scale:0.98→1）、`optionStagger` + `optionItem`、`transitionFade`（scale:0.92→1） | P0 | — | S | variants 在对应组件中使用 | `animations.ts` | ✅ |
 
