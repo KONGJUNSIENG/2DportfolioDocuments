@@ -91,7 +91,7 @@
 
 ## 四、执行任务表
 
-### Phase 6：VN UI 组件构建（4 组件 + 基础设施）✅ 全部完成
+### Phase 7 Part A：VN UI 组件构建（4 组件 + 基础设施）✅ 全部完成
 
 | ID | 任务 | 优先级 | 依赖 | 工作量 | 验收标准 | 产出文件 | 状态 |
 |----|------|--------|------|--------|---------|---------|:---:|
@@ -101,7 +101,7 @@
 | VN-6.4 | **创建 `SectionTransition.tsx`**：过渡台词组件。居中显示 `~ text ~`，水平装饰线贯穿，`whileInView` 淡入 400ms。不使用 DialogBox。Props: `{ text, className? }` | P0 | — | M | 滚动到视口时，文字从中心淡入放大；`viewport: { once: true }` | `SectionTransition.tsx` | ✅ |
 | VN-6.5 | **`animations.ts` 追加 5 个 VN variants**：`chapterReveal`（x:-30→0）、`dialogSlideUp`（y:24→0, scale:0.98→1）、`optionStagger` + `optionItem`、`transitionFade`（scale:0.92→1） | P0 | — | S | variants 在对应组件中使用 | `animations.ts` | ✅ |
 
-### Phase 7：首页 Section 集成 VN 组件 ✅ 全部完成
+### Phase 7 Part B：首页 Section 集成 VN 组件 ✅ 全部完成
 
 | ID | 任务 | 优先级 | 依赖 | 工作量 | 验收标准 | 产出文件 | 状态 |
 |----|------|--------|------|--------|---------|---------|:---:|
@@ -112,7 +112,7 @@
 | VN-7.5 | **ContactSection 改造**：顶部加 `<ChapterHeader chapterNumber={4} subtitle="SELECT AN OPTION" />`。联系方式改为 `<OptionButton>` 列表（email/GitHub/LinkedIn/Resume），无菜单框架容器 | P0 | VN-6.2, VN-6.3 | S | 章节标题显示；四个选项按钮；stagger 入场 | `ContactSection.tsx` | ✅ |
 | VN-7.6 | **Section 过渡台词集成**：`page.tsx` 中每个 Section 之间插入 `<SectionTransition>`，四段台词从 messages 读取 | P0 | VN-6.4 | M | 页面可见过渡线条 | `page.tsx` | ✅ |
 
-### Phase 7b：验证 ✅ 完成
+### Phase 7 Part C：验证 ✅ 完成
 
 | ID | 任务 | 优先级 | 依赖 | 工作量 | 验收标准 | 状态 |
 |----|------|--------|------|--------|---------|:---:|
@@ -200,3 +200,20 @@
 | **集成级** | 从各 Section 组件中移除 ChapterHeader / DialogBox / OptionButton 的引用，恢复原始 JSX |
 | **数据级** | 从 messages JSON 中移除 `transitions` 键（无影响，其他功能不依赖） |
 | **样式级** | `globals.css` 中 `--color-dialog-*` 可保留（未使用则无影响） |
+
+---
+
+## 八、后续：VN 第 2 弹 — Intro Scenario（已完成）
+
+VN 游戏感改造第 2 弹（`VN游戏感改造执行第2弹手册.md`）已在第 1 弹基础上完成以下扩展：
+
+| 模块 | 说明 |
+|------|------|
+| `/[lang]/intro` 路由 | VN 序幕独立路由，`/` 自动重定向至此 |
+| TitleScreen | 标题画面：角色立绘 + Slogan + 名称 +「开始」按钮 |
+| 暗転（PixelsCurtain） | 全屏黑色遮罩 + 光效粒子消散过渡 |
+| Scenario | 43 场景剧本驱动演绎：表情切换 + 打字机效果 + 章节标题 |
+| LoadingOverlay | 粒子光效 + 角色剪影 + 波纹扩散，完成后跳转首页 |
+| 角色表情 | 8 种表情 PNG（normal/smile/sad/mad/shock/shy/bigsmile/emm）|
+
+> 第 1 弹的 DialogBox / ChapterHeader / OptionButton / SectionTransition 组件在第 2 弹中继续使用（VNScenario 复用 DialogBox 和 ChapterHeader，TitleScreen 复用 OptionButton）。
