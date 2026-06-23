@@ -1,8 +1,8 @@
 # VN 游戏感浏览体验 — 改造执行手册 第 2 弹：Intro Scenario
 
 > **创建日期**：2026-06-19
-> **最后更新**：2026-06-22
-> **状态**：✅ **Phase 1-6 完成**
+> **最后更新**：2026-06-23
+> **状态**：✅ **Phase 1-7 完成**
 > **触发**：新增 VN 情景序幕，访客必须先游玩情景再进入首页
 > **品牌调性**：日系萌系 × 浅色科技感，开幕即沉浸
 > **相关文档**：4.1 / 4.2 / 5.2 / [[VN游戏感改造执行手册]]
@@ -51,7 +51,7 @@
 | 1   | `src/data/vn-scenario.zh.json`      | ✅ VN 中文剧本（43 场景，多分支 + 终场 + repel 排斥场景）               |
 | 2   | `src/data/vn-scenario.ja.json`      | ✅ VN 日文剧本                                                         |
 | 3   | `src/data/vn-scenario.en.json`      | ✅ VN 英文剧本                                                         |
-| 4   | `src/components/VNScenario.tsx`     | ✅ VN 情景播放器核心组件（状态机驱动，逐帧播放场景）                    |
+| 4   | `src/components/VNScenario.tsx`     | ✅ VN 情景播放器核心组件（状态机驱动，逐帧播放场景，右下角 Skip 按钮可中途跳过）|
 | 5   | `src/components/IntroShell.tsx`      | ✅ 客户端状态机，管理 5 阶段流转（intro → transition → scenario → loading） |
 | 6   | `src/components/IntroAnimation.tsx`  | ✅ 开场动画编排组件：ripple → white → curtains → title 序列            |
 | 7   | `src/components/LoadingRipple.tsx`   | ✅ 三环涟漪脉冲载入动画（~2.0s 自动完成）                               |
@@ -76,7 +76,7 @@
 | 4   | `src/app/[lang]/intro/page.tsx`      | ✅ 改为只读数据 → 渲染 `<IntroShell>`（Server → Client bridge）         |
 | 5   | `src/components/TitleScreen.tsx`     | ✅ **重写** 改为 centercard 布局（✦装饰线+粉辉光），移除角色立绘和 Start 按钮，标题改用 ScrambleText，新增 Settings 弹窗代替语言 pill 按钮，Skip 右下角延迟显示 |
 | 6   | `src/components/LoadingOverlay.tsx`  | ✅ **重写** curtain wipe 动画（左右面板滑动展开），替代 loading 文字     |
-| 7   | `src/components/VNScenario.tsx`      | ✅ 选项居中 overlay + bg-black/50 遮罩 + stagger 入场；人物尺寸 108vh/136vh；对话内联渲染底部；新增 `nextScene` 跳转、`isEnding` 检测、**鼠标排斥交互**、**自动推进倒计时**、**点击锁**、字体加大 |
+| 7   | `src/components/VNScenario.tsx`      | ✅ 选项居中 overlay + bg-black/50 遮罩 + stagger 入场；人物尺寸 108vh/136vh；对话内联渲染底部；新增 `nextScene` 跳转、`isEnding` 检测、**鼠标排斥交互**、**自动推进倒计时**、**点击锁**、字体加大、**Skip 按钮（右下角，无延迟，白色字体，▶ hover 显示）** |
 | 8   | `public/images/hero-character.png`   | ✅ 立绘素材更新（替换原始 C1-1.png）                                      |
 
 ### 2.3 删除文件
@@ -478,6 +478,17 @@ t=1400ms    面板完全缩回
 | VN2-9.9  | 同步 vn-scenario.en.json / vn-scenario.ja.json 为新结构   |  ✅  |
 | VN2-9.10 | 全流程 lint + typecheck + build                           |  ✅  |
 
+### ✅ VN2 Phase 7：VNScenario Skip 按钮
+
+| ID        | 任务                                                      | 状态 |
+| --------- | --------------------------------------------------------- | :--: |
+| VN2-10.1  | VNScenario 新增 `lang` prop（与 TitleScreen 一致的翻译方式） |  ✅  |
+| VN2-10.2  | 右下角添加 Skip 按钮，与 TitleScreen 同款样式但无延迟淡入    |  ✅  |
+| VN2-10.3  | 字体白色 `text-white/80`→`hover:text-white`，对齐 VNScenario 选项配色 |  ✅  |
+| VN2-10.4  | ▶ 蓝色三角默认隐藏，hover 时从左侧滑入（`opacity-0`→`group-hover:opacity-100`） |  ✅  |
+| VN2-10.5  | IntroShell 传递 `lang` prop 给 VNScenario                   |  ✅  |
+| VN2-10.6  | lint + typecheck + build 验证                              |  ✅  |
+
 ---
 
 ## 九、验收清单
@@ -519,6 +530,10 @@ t=1400ms    面板完全缩回
 - [x] repel 场景：鼠标靠近时选项逃离，无法点击
 - [x] autoAdvance 场景：5s 后自动推进到下一场景
 - [x] 点击锁：auto-advance 后 500ms 内阻挡 advance，防连点跳过
+- [x] Skip 按钮：右下角，无延迟加载淡入
+- [x] Skip 按钮字体：`text-white/80`→`hover:text-white`
+- [x] Skip 按钮 ▶：默认隐藏，hover 时从左侧滑入（蓝色 `text-dialog-blue`）
+- [x] 点击 Skip → 直接 `onFinish()` → LoadingOverlay → 首页
 
 ### 加载转场
 - [x] Curtain Wipe：左右面板 bg-[#1A1A2E] 滑动展开
@@ -537,6 +552,6 @@ t=1400ms    面板完全缩回
 | 层级       | 操作                                                                 |
 | ---------- | -------------------------------------------------------------------- |
 | **完整回滚** | 删除 `app/[lang]/intro/` + 所有新增组件（含 emotion PNG），恢复 `proxy.ts` 原始内容 |
-| **仅新功能回滚** | 删除 `IntroAnimation.tsx`/`ScrambleText.tsx`/`LoadingRipple.tsx`/`PixelsCurtain.tsx`，还原旧版 TitleScreen |
+| **仅新功能回滚** | 删除 `IntroAnimation.tsx`/`ScrambleText.tsx`/`LoadingRipple.tsx`/`PixelsCurtain.tsx`，还原旧版 TitleScreen；移除 VNScenario Skip 按钮（还原 `VNScenario.tsx` + `IntroShell.tsx`）|
 | **数据级** | 删除 `src/data/vn-scenario.*.json`                                   |
 | **布局级** | 恢复 `LayoutShell.tsx` 移除 intro 路由判断                            |
