@@ -56,7 +56,7 @@
 | 3 | `src/messages/zh.json` | ✅ 已完成（新增 `transitions` 键） |
 | 4 | `src/messages/ja.json` | ✅ 已完成 |
 | 5 | `src/messages/en.json` | ✅ 已完成 |
-| 6 | `src/components/HeroSection.tsx` | ✅ CTA 按钮替换为 `<OptionButton>`；按钮加高 `py-4`；间距 `mt-8`→`mt-6`，Scroll ↓ `mt-6`→`mt-4` |
+| 6 | `src/components/HeroSection.tsx` | ✅ CTA 按钮替换为 `<OptionButton>`；按钮加高 `py-4 md:py-6`（手机端/桌面端区分）；间距 `mt-8`→`mt-6`，Scroll ↓ `mt-6`→`mt-4` |
 | 7 | `src/components/CaseStudiesSection.tsx` | ✅ 顶部加 `<ChapterHeader chapterNumber={1} />` |
 | 8 | `src/components/ProjectsSection.tsx` | ✅ 顶部加 `<ChapterHeader chapterNumber={2} />` |
 | 9 | `src/components/AboutSection.tsx` | ✅ 顶部加 `<ChapterHeader chapterNumber={3} />`；bio 改为 `<DialogBox characterName="KONG JUN SIENG">` |
@@ -105,7 +105,7 @@
 
 | ID | 任务 | 优先级 | 依赖 | 工作量 | 验收标准 | 产出文件 | 状态 |
 |----|------|--------|------|--------|---------|---------|:---:|
-| VN-7.1 | **HeroSection 改造**：CTA 按钮替换为 `<OptionButton>`；按钮加高 `py-4`；button 上方 `mt-8`→`mt-6`，Scroll ↓ `mt-6`→`mt-4` | P0 | VN-6.3 | S | CTA 显示为蓝底白字按钮；间距合理 | `HeroSection.tsx` | ✅ |
+| VN-7.1 | **HeroSection 改造**：CTA 按钮替换为 `<OptionButton>`；按钮加高 `py-4 md:py-6`；button 上方 `mt-8`→`mt-6`，Scroll ↓ `mt-6`→`mt-4` | P0 | VN-6.3 | S | CTA 显示为蓝底白字按钮；间距合理 | `HeroSection.tsx` | ✅ |
 | VN-7.2 | **CaseStudiesSection 改造**：顶部加 `<ChapterHeader chapterNumber={1} />`。CaseStudyCard 保持原始结构不变（描述不使用 DialogBox） | P0 | VN-6.2 | S | 章节标题显示 | `CaseStudiesSection.tsx` | ✅ |
 | VN-7.3 | **ProjectsSection 改造**：顶部加 `<ChapterHeader chapterNumber={2} />` | P0 | VN-6.2 | S | 章节标题显示 | `ProjectsSection.tsx` | ✅ |
 | VN-7.4 | **AboutSection 改造**：顶部加 `<ChapterHeader chapterNumber={3} />`。bio 替换为 `<DialogBox characterName="KONG JUN SIENG">`（叠在 PNG 位置，无独立外框） | P0 | VN-6.1, VN-6.2 | M | 章节标题显示；自我介绍在对话框内；名字显示在 PNG 上 | `AboutSection.tsx` | ✅ |

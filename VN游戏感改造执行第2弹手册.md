@@ -76,7 +76,7 @@
 | 4   | `src/app/[lang]/intro/page.tsx`      | ✅ 改为只读数据 → 渲染 `<IntroShell>`（Server → Client bridge）         |
 | 5   | `src/components/TitleScreen.tsx`     | ✅ **重写** 改为 centercard 布局（✦装饰线+粉辉光），移除角色立绘和 Start 按钮，标题改用 ScrambleText，新增 Settings 弹窗代替语言 pill 按钮，Skip 右下角延迟显示 |
 | 6   | `src/components/LoadingOverlay.tsx`  | ✅ **重写** curtain wipe 动画（左右面板滑动展开），替代 loading 文字     |
-| 7   | `src/components/VNScenario.tsx`      | ✅ 选项居中 overlay + bg-black/50 遮罩 + stagger 入场；人物尺寸 108vh/136vh；对话内联渲染底部；新增 `nextScene` 跳转、`isEnding` 检测、**鼠标排斥交互**、**自动推进倒计时**、**点击锁**、字体加大、**Skip 按钮（右下角，无延迟，白色字体，▶ hover 显示）** |
+| 7   | `src/components/VNScenario.tsx`      | ✅ 选项居中 overlay + bg-black/50 遮罩 + stagger 入场；人物尺寸 Mobile 100vh(cover)/Desktop 136vh(contain)；对话内联渲染底部；新增 `nextScene` 跳转、`isEnding` 检测、**鼠标排斥交互**、**自动推进倒计时**、**点击锁**、字体加大、**Skip 按钮（右下角，无延迟，白色字体，▶ hover 显示）** |
 | 8   | `public/images/hero-character.png`   | ✅ 立绘素材更新（替换原始 C1-1.png）                                      |
 
 ### 2.3 删除文件
@@ -171,7 +171,7 @@ intro/page.tsx (Server Component, 读取 vn-scenario JSON)
       ├── 暗転遮罩 (phase === "transition", 700ms, 纯黑 bg)
       │
       ├── VNScenario (phase === "scenario")
-      │   ├── 角色立绘 (108vh/136vh, 通过 characterImage 字段切换)
+      │   ├── 角色立绘 (Mobile 100vh cover / Desktop 136vh contain, 通过 characterImage 字段切换)
       │   ├── 底部对话区域 (内联渲染, no DialogBox, h-[30vh])
       │   ├── 选项 overlay (居中, bg-black/50 遮罩, stagger 入场, text-xl md:text-2xl)
       │   ├── 鼠标排斥交互 (repel, 选项组整体逃离光标, CSS 0.15s ease-out)
@@ -297,12 +297,12 @@ t=1000ms  VNScenario 完全显示
 
 ### 6.2 人物尺寸
 
-| 断点     | 实际值      | 说明                 |
-| -------- | ----------- | -------------------- |
-| Mobile   | **108vh**   | 超出屏幕，营造贴近感  |
-| Desktop  | **136vh**   | 大幅放大角色存在感    |
+| 断点     | 实际值      | object-fit      | 说明                            |
+| -------- | ----------- | --------------- | ------------------------------- |
+| Mobile   | **100vh**   | **`object-cover`** | 宽度填满，左右自然裁切，人物放大  |
+| Desktop  | **136vh**   | `object-contain` | 大幅放大角色存在感，全身完整可見  |
 
-人物尺寸远超原文档的 +25% 方案，通过 `top-[-50]` 偏移使角色腰部以下被裁切，产生 VN 式"大立绘贴近"效果。
+手機端改為 `object-cover` + `top-0` 取代 `object-contain` + `top-[-50]`。人物不再被裁切頭頂，且 `object-cover` 使人物以更大比例渲染，填滿螢幕寬度（左右多餘部分自然裁切），解決行動端立繪尺寸不足的問題。
 
 ### 6.3 对话渲染
 
@@ -438,7 +438,7 @@ t=1400ms    面板完全缩回
 | ID       | 任务                                                        | 状态 |
 | -------- | ----------------------------------------------------------- | :--: |
 | VN2-6.1  | 选项移至画面正中央（overlay + stagger 入场）                  |  ✅  |
-| VN2-6.2  | 人物尺寸放大至 108vh/136vh（超大立绘贴近效果）                 |  ✅  |
+| VN2-6.2  | 人物尺寸 Mobile 100vh(cover)/Desktop 136vh(contain)（超大立绘贴近效果）                 |  ✅  |
 | VN2-6.3  | 对话内联渲染（不依赖 DialogBox 组件）                         |  ✅  |
 | VN2-6.4  | 选项文字大小调整（text-lg md:text-xl）                        |  ✅  |
 | VN2-6.5  | 终场调用 onFinish 回调替代 router.push                       |  ✅  |
@@ -518,7 +518,7 @@ t=1400ms    面板完全缩回
 - [x] 黑屏 fade out + VNScenario fade in
 
 ### VN 情景
-- [x] 角色立绘 108vh/136vh 超大尺寸
+- [x] 角色立绘 Mobile 100vh(cover) / Desktop 136vh(contain) 超大尺寸
 - [x] 无选项时点击推进场景（支持 nextScene 跳过中间序列）
 - [x] 有选项时：选项居中 + 角色区域 bg-black/50 overlay
 - [x] 选项文字 text-xl md:text-2xl
