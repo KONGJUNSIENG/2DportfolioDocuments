@@ -95,7 +95,7 @@
 
 | ID | 任务 | 优先级 | 依赖 | 工作量 | 验收标准 | 产出文件 | 状态 |
 |----|------|--------|------|--------|---------|---------|:---:|
-| VN-6.1 | **创建 `DialogBox.tsx`**：VN 对话框。三层圆角结构（白框 `rounded-lg` + 名字框 `rounded-xl` + 文字框 `rounded-md`）。底色 `#2FA4D7`，等比例 `aspect-[1200/225]`，内层 flex 1:3 固定比例。Props: `{ characterName?, children, className? }` | P0 | — | M | 进入视口对话框淡入上浮；名字框与文字框高度固定 1:3；文字白色；响应式自适应 | `DialogBox.tsx` | ✅ |
+| VN-6.1 | **创建 `DialogBox.tsx`**：VN 对话框。三层圆角结构（白框 `rounded-lg` + 名字框 `rounded-xl` + 文字框 `rounded-md`）。底色 `#2FA4D7`，`md:min-h-[100px]`（桌面自适应高度），`min-h-[120px]`（手机），内层 flex 1:3。Props: `{ characterName?, children, className? }` | P0 | — | M | 进入视口对话框淡入上浮；白框随内容自动撑高；名字/文字框高度比例 1:3；文字白色；响应式自适应 | `DialogBox.tsx` | ✅ |
 | VN-6.2 | **创建 `ChapterHeader.tsx`**：VN 章节标题。Props: `{ chapterNumber?: number, title, subtitle?, className? }`。渲染：`CHAPTER 01` 标签 (`text-dialog-blue`) → 标题 → 蓝色下划线装饰条 | P0 | — | M | 进入视口时：整体从左侧滑入（x:-30→0, 500ms） | `ChapterHeader.tsx` | ✅ |
 | VN-6.3 | **创建 `OptionButton.tsx`**：VN 选项按钮。使用 option-button.png 为背景素材：蓝底白色文字，`▶` 指示符，`whileHover` 右移+放大。Props: `{ children, onClick?, className? }` | P0 | — | S | 按钮渲染为蓝底白字；hover 缩放+右移 4px；tap 缩回 | `OptionButton.tsx` | ✅ |
 | VN-6.4 | **创建 `SectionTransition.tsx`**：过渡台词组件。居中显示 `~ text ~`，水平装饰线贯穿，`whileInView` 淡入 400ms。不使用 DialogBox。Props: `{ text, className? }` | P0 | — | M | 滚动到视口时，文字从中心淡入放大；`viewport: { once: true }` | `SectionTransition.tsx` | ✅ |
