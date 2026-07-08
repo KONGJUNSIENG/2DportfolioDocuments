@@ -233,7 +233,7 @@ Next.js 16 App Router + TypeScript Strict + Tailwind v4のプロジェクトの�
 
 ### オンラインリンク
 
-本番環境：`https://junsieng-portfolio.vercel.app`（デプロイ予定）
+本番環境：`https://junsieng-portfolio.vercel.app`
 
 ## 議論
 

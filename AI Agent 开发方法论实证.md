@@ -233,7 +233,7 @@ Case Study 详情正文从 Markdown 编译链路迁移至 messages JSON 直接�
 
 ### 线上链接
 
-生产环境：`https://junsieng-portfolio.vercel.app`（待部署）
+生产环境：`https://junsieng-portfolio.vercel.app`
 
 ## 讨论
 

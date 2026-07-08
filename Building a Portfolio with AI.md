@@ -233,7 +233,7 @@ The level of detail in the documents isn't reduced — they still serve as key r
 
 ### Online Links
 
-Production: `https://junsieng-portfolio.vercel.app` (pending deployment)
+Production: `https://junsieng-portfolio.vercel.app`
 
 ## Discussion
 
